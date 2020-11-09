@@ -1,0 +1,47 @@
+install.packages("sp")
+
+library(sp)
+data(meuse)
+
+# Let's see how the meuse dataset is structured:
+meuse
+
+# let's look at the first row of the set
+head(meuse)
+
+# summary
+# exercise: make the summary of the set
+summary(meuse)
+
+
+# lets' plot two variables
+# let's see of the zinc concentration is realted to that of copper
+attach(meuse)
+plot(zinc,copper)
+plot(zinc,copper,col="green")
+plot(zinc,copper,col="green",pch=19)
+plot(zinc,copper,col="green",pch=19,cex=2)
+
+##############
+
+# let's plot altogether!
+
+pairs(meuse)
+
+pairs(~ cadmium + copper + lead , data = meuse)    #CHECK RECORDING for the using of tilde ~ (ALT+126)
+
+# Exercie: cadmium copper lead zinc
+
+pairs(meuse[,3:6])
+
+pairs(meuse[,3:6], col="red")
+
+pairs(meuse[,3:6], col="red", pch=19)
+
+pairs(meuse[,3:6], col="red", pch=19, cex=3)
+
+pairs(meuse[,3:6], col="red", pch=19, cex=3, main="Primo pairs")
+
+# Exercise: do the same for the relationship between elevation and the elements
+
+pairs(meuse[,3:7], col="red", pch=19, cex=3, main="Primo pairs")
