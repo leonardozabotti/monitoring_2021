@@ -65,11 +65,26 @@ ggplot(d, aes(x = biofuels, y = oxydative)) + geom_line() + geom_point()
 
 ggplot(d, aes(x = biofuels, y = oxydative)) + geom_line() + geom_polygon()      #\geom_polygon() creates polygons about differences with the mean line
 
-#### SETTING A WOTKING DIRECTORY \setwd("path between brackets")\: is fundamental to import data and datasets that must be saved in that directory
+#### SETTING A WORKING DIRECTORY \setwd("path between brackets")\: is fundamental to import data and datasets that must be saved in that directory
 
 setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
 
+#let's now import a .csv file already present in the WD
 
+covid <- read.table("covid_agg.csv", header=TRUE)     #header means that the table already has an header so the fist line is not data
+covid
+head(covid)
+summary(covid)
+
+#let's plot with ggplot2
+# if not already activated, remember: 
+library(ggplot2)
+
+names(covid)     #shows just the names of the variables of the dataset if we don't remember
+
+ggplot(covid, aes(x = lon, y = lat)) + geom_point()      #in spatial data X is longitude and Y is latitude; we're displaying one point per country wihout its value
+
+ggplot(covid, aes(x = lon, y = lat, size = cases)) + geom_point()   # we change size according to the amount of cases. Remember to put \size\ inside \aes()\
 
 
 
