@@ -1,3 +1,46 @@
 # ---- POINT PATTERN
 # remember to set the ~lab folder as the working directory
 
+setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+
+# let's install the package we need = "spatstat"
+
+install.packages("spatstat")
+library(spatstat)
+
+#let's now import a .csv file already present in the WD
+
+covid <- read.table("covid_agg.csv", header=TRUE)     #header means that the table already has an header so the fist line is not data
+covid
+
+# Now let's see the density of covid data!
+
+# the function we are going to use is \ppp\ to make a Planar Point Pattern 
+help(ppp)     # to see parameters
+
+# before going on, since we'll use just one dataset is better to \attach()\ it
+
+attach(covid)
+
+# let's now use \ppp(x, y, x.range, y.range,)\ . If you don't remember the names of variables just put \names(covid)\
+
+covid_planar <- ppp(lon, lat, c(-180,180), c(-90, 90))   # the ranges are the ranges of Earth's longitude and latitude; in general the range of coordinates are the range of the final map that we want to obtain or just increase a bit the range present in the dataset
+
+#once the planar point pattern is created we can create a map using the \density()\ function that uses the covid ppp
+
+dens_map <- density(covid_planar)
+plot(dens_map)      #shows the map obtained in the ranges selected
+
+#if we want to put points on top of our map we can:
+points(covid_planar)
+
+ # \colorRampPalette()\ changes the colours of the range in the map according to density. Colours are important ("The misure of coulour in science communications" check paper on Nature)
+ 
+cl <- colorRampPalette(c('yellow', 'orange', 'red'))(100)      #the number (100) means that in between colours we want 100 shades; order of colours are from lower to higher value; check colours in R on Google
+plot(dens_map, col = cl)
+points(covid_planar)
+
+# we are now ready to put country border on the map using another package which is \rgdal\ that uses a library of geospatial data abstraction open source made from osgeo.org
+
+install.packages("rgdal")
+
