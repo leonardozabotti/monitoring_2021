@@ -43,4 +43,11 @@ points(covid_planar)
 # we are now ready to put country border on the map using another package which is \rgdal\ that uses a library of geospatial data abstraction open source made from osgeo.org
 
 install.packages("rgdal")
+library(rgdal)
+
+#download ne_10m coastline file from VIRTUALE  and put them in the WD; .shp file has info about spatial distribution, .dbf has the dataset related to coordinates, .shx has indexes connecting spatian data to dataset
+
+coastlines <- readOGR("ne_10m_coastline.shp")   #we import a shape file and we give it a name
+
+
 
