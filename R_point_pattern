@@ -87,8 +87,39 @@ plot(cases_map, col=cl)
 plot(coastlines, add=T)      # REMEMBER TO PUT add=T
 points(covid_planar, pch=19, cex=0.2)
 
+#CODE BY NORMA: INTERPOLATION WITH DIFFERENTLY SIZED POINTS to show two types of information in one map (size of points is based on the number of cases)
+
+setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+
+library(spatstat)
+library(rgdal)
+
+covid <- read.table("covid_agg.csv", header=TRUE)        #or read.csv
+attach(covid)                                            #so the lon and lat will read automatically from covid instead of writing covid$lon and covid$lat
+covid_planar <- ppp(lon, lat, c(-180,180), c(-90, 90))
+
+marks(covid_planar) <- cases                   #we explain to R where to find the data stating the column of the dataset and using \marks()\ to put the data in every single point of the map
+cases_map <- Smooth(covid_planar)              # \Smooth()\ is the function to create interpolation
+coastlines <- readOGR("ne_10m_coastline.shp")  #we will need coastlines
 
 
+cl <- colorRampPalette(c('lightpink2','lightsalmon','tomato1','red3','maroon'))(100)
+density_map <- density(covid_planar)
+plot(density_map)
+plot(cases_map, col = cl)
+plot(coastlines, add = T)
+
+#install.packages("sf")
+library(sf)
+Spoints <- st_as_sf(covid, coords = c("lon", "lat"))         #the function takes the covid data and the coordinates
+plot(Spoints, cex=Spoints$cases, col = 'purple3', lwd = 3, add=T)            #points are too big
+plot(Spoints, cex=Spoints$cases/10000, col = 'purple3', lwd = 3, add=T)      #dividing the point size is necessary to have points whose size fit in the map
+
+#now let's plot all together
+cl <- colorRampPalette(c('lightpink2','lightsalmon','tomato1','red3','maroon'))(100)
+plot(cases_map, col = cl)
+plot(coastlines, add = T)
+plot(Spoints, cex=Spoints$cases/10000, col = 'purple3', lwd = 3, add=T) 
 
 
 
