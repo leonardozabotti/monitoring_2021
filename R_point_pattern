@@ -15,7 +15,7 @@ covid
 
 # Now let's see the density of covid data!
 
-# the function we are going to use is \ppp\ to make a Planar Point Pattern 
+# the function we are going to use is \ppp\ to make a Planar Point Pattern that R need to build spatial maps
 help(ppp)     # to see parameters
 
 # before going on, since we'll use just one dataset is better to \attach()\ it
@@ -122,4 +122,56 @@ plot(coastlines, add = T)
 plot(Spoints, cex=Spoints$cases/10000, col = 'purple3', lwd = 3, add=T) 
 
 
+
+###---INTERPOLATION FROM STUDENT'S DATA
+
+#  IMPORTANT:REFERENCE SYSTEMS. Earth is a geoid (surface perpendicular to the gravity force - equipotential surfaces and the geoid surface is the sea level) so we use a different surface and not the topographic surface 
+#                               ED50 (called international ellipsoid) is the ellipsoid used for Europe but it's not good for North America that actually uses NAD27 (called Clarke ellipsoid) as the reference ellipsoid but there are
+#                               plenty of different ellipsoids. So every time we use coordinates like longitude and latitude we need to state the reference system. Nowadays they're promoting the World Geodetic System trying to use
+#                               the same system worldwide. Also the GPS (Global Position System) use the same coordinates. UTM is the Universal Transverse Mercator that project Earth'surface in a flat plane (every piece is called zone
+#                              or "fuso" in italian). This allow us to measure the distance from the Meridian. Greenwich meridian is given a number different to zero in order not to have negative numbers of the left side of the planet.
+#                              In UTM every zone is 6 degrees and there are 60 zones. Italy is divided into two zones: from 6 to 12 degrees and from 12 to 18 degrees. 
+#                              In the data we're using coordinates are calculated in meters (Gauss Boaga system) from the Greenwich Meridian (x) and from the Equator (y).
+
+#let's import the data. REMEMBER TO SET THE WD BEFORE THAT
+
+setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+
+leo <- read.table("dati_zabotti.csv", head=T, sep=",")  
+head(leo)
+
+##    We want to make the PPP in order to build the density map
+
+attach(leo)
+
+library(spatstat)
+leo_ppp <- ppp(x, y, c(2300000,2325000), c(5005000,5045000))       # \summary(leo)\ will show the minimum and maximum x and y in order to build the range (usually bigger than the values)
+
+dens_leo <- density(leo_ppp)      #to build the density object and then plot it
+plot(dens_leo)
+points(leo_ppp)
+
+##   We now want to interpolate missing data
+
+marks(leo_ppp) <- chlh        #we're interpolating the values of chlorophyll
+chlh_map <- Smooth(leo_ppp)
+plot(chlh_map)
+
+
+###---HOW TO SAVE WORKSPACE? Go to file menu so next time you open we don't have to import data again
+
+marks(leo_ppp) <- t
+t_map <- Smooth(leo_ppp)
+plot(t_map)
+points(leo_ppp)
+
+par(mfrow=c(1,2))
+plot(chlh_map)
+points(leo_ppp)
+
+plot(t_map)
+points(leo_ppp)
+
+
+# Exercise: do the same for chlorophyll in the sediment (chls)
 
