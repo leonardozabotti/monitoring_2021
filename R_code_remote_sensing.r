@@ -73,6 +73,9 @@ p224r63_1988 <- brick("p224r63_1988_masked.grd")
 
 #we can compare the images between two different years
                  
+                 
+###  LESSON STOPPED HERE --------------------------------------------------
+                 
 par(mfrow=c(2,1))
 plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="Lin")
 plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
