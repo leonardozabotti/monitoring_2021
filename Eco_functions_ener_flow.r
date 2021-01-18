@@ -5,6 +5,8 @@
 # chemical cycling
 # proxies
 
+setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+
 # install.packages("rasterdiv")
 # install.packages("rasterVis")
 
@@ -63,7 +65,7 @@ levelplot(copNDVI10)
 copNDVI100 <- aggregate(copNDVI, fact=100)
 levelplot(copNDVI100)
 
-####################################
+####################################    THIS SECTION WAS NOT DONE
 
 # library(ggplot2)
 
@@ -75,44 +77,76 @@ levelplot(copNDVI100)
 # labs(x="Longitude",y="Latitude", fill="")+
 #   theme(legend.position = "bottom") +
 #  NULL
+#####################################
 
+# DEFORESTATION EXAMPLES
 
-setwd("~/lab/")
-# setwd("/Users/utente/lab") #mac
-# setwd("C:/lab/") # windows
+setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
 
 library(raster)
 
-defor1 <- brick("defor1_.jpg") 
+defor1 <- brick("defor1_.jpg")          # function \brick()\ is similar to \stack()\ and import images with different layers/bands
 defor2 <- brick("defor2_.jpg") 
+
+defor1   #shows some information about the object as for examples the bits of the images. In this case
+# we have an image in 8bits so it has 2^8 colours that are 256 colours. R tells us the min value is 0 and the max is 255
 
 # band1: NIR, defor1_.1
 # band2: red, defor1_.2
 # band3: green
 
-plotRGB(defor1, r=1, g=2, b=3, stretch="Lin")
-plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
+#in this case Prof assembled the image so he knows which band is which but in any case we can always try and play to see what we obtain
 
+plotRGB(defor1, r=1, g=2, b=3, stretch="Lin")     # we have used this function in the past. Computers shows images in the RGB system 
+plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
+# by putting r=1 it means all the things that reflects NIR (usually leaves/vegetation) will turn red because the first layer in our image is NIR
+
+#Exercise: put images side by side in the same image (multiframe)
 par(mfrow=c(1,2))
 plotRGB(defor1, r=1, g=2, b=3, stretch="Lin")
 plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
 
-dvi1 <- defor1$defor1_.1 - defor1$defor1_.2 
+# We calculate the DVI (biomass index) value defined ad (NIR - RED). High DVI means lot of vegetation and/or not stressed (high NIR and low RED). Lower values means less vegetation or stressed. 
+
+dvi1 <- defor1$defor1_.1 - defor1$defor1_.2       #DVI on the first image
 
 # defor2
 # band1: NIR, defor2_.1
 # band2: red, defor2_.2
 
+# DVI after the deforestation
 dvi2 <- defor2$defor2_.1 - defor2$defor2_.2 
 
 cl <- colorRampPalette(c('darkblue','yellow','red','black'))(100) # specifying a color scheme
 par(mfrow=c(1,2))
-plot(dvi1, col=cl)
-plot(dvi2, col=cl)
+plot(dvi1, col=cl, main= "DVI pre-cut")
+plot(dvi2, col=cl, main= "DVI after-cut")
 
+# now we can compare the DVI of the two images to see how it changed after the cut
 difdvi <- dvi1 - dvi2
 
 cld <- colorRampPalette(c('blue','white','red'))(100) 
-plot(difdvi, col=cld)
+plot(difdvi, col=cld,  main="DVI pre cut - DVI after cut")
 
-hist(difdvi)
+# we can even change the order doing DVI2 - DVI1
+difdvi2 <- dvi2 - dvi1
+plot(difdvi2, col=cld,  main="DVI after cut - DVI pre cut")       # shows the loss of energy/biomass after the cut
+
+hist(difdvi, main= "DifDvi frequency")        # the \hist()\ function creates an histogram of a given database. IN this case it plots the values of DIFDVI and their frequency
+# it will show that the distribution is skewed as there was a loss of biomass
+
+#### Exercise: create a multiframe with all the images created
+#defor1
+#defor2
+#dvi1
+#dvi2
+#difdvi
+#histogram
+
+par(mfrow=c(3,2))
+plotRGB(defor1, r=1, g=2, b=3, stretch="Lin")
+plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
+plot(dvi1, col=cl, main= "DVI pre-cut")
+plot(dvi2, col=cl, main= "DVI after-cut")
+plot(difdvi, col=cld,  main="DVI pre cut - DVI after cut")
+hist(difdvi, col="red", main= "DifDvi frequency") 
