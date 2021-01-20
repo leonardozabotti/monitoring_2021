@@ -82,4 +82,4 @@ plot(EN,col=cl)         # same effects as using \par()\ and creating a list of p
 plotRGB(EN, red=EN13, green=EN13, blue=EN01, stretch="lin")
                       
 dev.off()
-boxplot(EN,horizontal=T,axes=T,outline=F)
+boxplot(EN,horizontal=T,axes=T,outline=F)       # let's us see the value distribution, the mean and the max values
