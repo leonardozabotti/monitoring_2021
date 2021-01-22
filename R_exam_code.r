@@ -64,9 +64,51 @@ dev.off()
 
 ### CONSIDERATION: 300m is better so we'll keep working with this resol. 
 
-###----------------- 
+###----------------------------------------------------------------------
 
 # Let's now check for differences between the week before and after the storm (26-30 Oct. 2018)
 
+oct18 <- raster("c_gls_NDVI300_201810110000_GLOBE_PROBAV_V1.0.1.nc")
+nov18 <- raster("c_gls_NDVI300_201811010000_GLOBE_PROBAV_V1.0.1.nc")
 
+# Cropping images before plotting to avoid high time computer elaboration on heavy images 
+
+ext <- c(11,13,46,47)         # area of the italian Dolomites
+oct18_dol <- crop(oct18, ext)
+nov18_dol <- crop(nov18, ext)
+
+#Checking for differences in NDVI
+dif.2 <- nov18_dol - oct18_dol
+
+#Creating a colour palette that highlights negative differences (biomass losses)
+cl <- colorRampPalette(c('red','white','grey'))(100)
+
+#Plotting the differences
+plot(dif.2, col= cl)
+
+###----------------------------------------------------------------------
+
+# Let's try using ALBEDO instead of NDVI which could also be affected by lower temperature or higher stress
+
+al_oct18 <- raster("c_gls_ALDH_201810130000_GLOBE_PROBAV_V1.5.1.nc")
+al_nov18 <- raster("c_gls_ALDH_201811030000_GLOBE_PROBAV_V1.5.1.nc")
+
+# Cropping images before plotting to avoid high time computer elaboration on heavy images 
+
+ext <- c(11,13,46,47)         # area of the italian Dolomites
+al_oct18_dol <- crop(al_oct18, ext)
+al_nov18_dol <- crop(al_nov18, ext)
+
+#Checking for differences in NDVI
+al_dif <- al_nov18_dol - al_oct18_dol
+
+#Creating a colour palette that highlights negative differences (biomass losses)
+al_cl <- colorRampPalette(c('grey', 'yellow','black'))(100)
+
+#Plotting the differences
+plot(al_dif, col= al_cl)
+
+### CONSIDERATION: 1 km resolution for ALBEDO is too low
+
+###----------------------------------------------------------------------
 
