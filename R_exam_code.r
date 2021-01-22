@@ -112,3 +112,26 @@ plot(al_dif, col= al_cl)
 
 ###----------------------------------------------------------------------
 
+# Let's try using FCOVER 
+
+fc_jun18 <- raster("c_gls_FCOVER300_201806100000_GLOBE_PROBAV_V1.0.1.nc")
+fc_jun19 <- raster("c_gls_FCOVER300_201906100000_GLOBE_PROBAV_V1.0.1.nc")
+
+# Cropping images before plotting to avoid high time computer elaboration on heavy images 
+
+ext <- c(11,13,46,47)         # area of the italian Dolomites
+fc_jun18_dol <- crop(fc_jun18, ext)
+fc_jun19_dol <- crop(fc_jun19, ext)
+
+#Checking for differences in NDVI
+fc_dif <- fc_jun19_dol  - fc_jun18_dol 
+
+#Creating a colour palette that highlights negative differences (biomass losses)
+fc_cl <- colorRampPalette(c('black', 'yellow','green'))(100)
+ 
+#Plotting the differences
+plot(fc_dif, col= fc_cl)
+
+
+### CONSIDERATIONS: way better!!
+
