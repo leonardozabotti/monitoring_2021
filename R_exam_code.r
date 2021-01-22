@@ -14,16 +14,16 @@ aug18 <- raster("c_gls_NDVI300_201808010000_GLOBE_PROBAV_V1.0.1.nc")
 aug19 <- raster("c_gls_NDVI300_201908010000_GLOBE_PROBAV_V1.0.1.nc")
 
 # Cropping images before plotting to avoid high time computer elaboration on heavy images 
-ext <- c(10,15,45,48)
-aug19_NEita <- crop(aug19, ext)
-aug18_NEita <- crop(aug18, ext)
+ext <- c(11,13,46,47)
+aug19_dol <- crop(aug19, ext)
+aug18_dol <- crop(aug18, ext)
 
 #First plotting
-plot(aug19_NEita)
-plot(aug19_NEita)
+plot(aug19_dol)
+plot(aug19_dol)
 
 #Checking for differences in NDVI
-dif <- aug19_italy - aug18_italy
+dif <- aug19_dol - aug18_dol
 
 #Creating a colour palette that highlights negative differences (biomass losses)
 cl <- colorRampPalette(c('red','white','grey'))(100)
