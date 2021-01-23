@@ -117,9 +117,11 @@ plot(al_dif, col= al_cl)
 fc_jun18 <- raster("c_gls_FCOVER300_201806100000_GLOBE_PROBAV_V1.0.1.nc")
 fc_jun19 <- raster("c_gls_FCOVER300_201906100000_GLOBE_PROBAV_V1.0.1.nc")
 
-# Cropping images before plotting to avoid high time computer elaboration on heavy images 
+# Cropping images before plotting to avoid high time computer elaboration on heavy images (Choose one of the two options)
 
-ext <- c(11,13,46,47)         # area of the italian Dolomites
+#ext <- c(11,13,46,47)         # area of the italian Dolomites
+#ext <- c(7,13,45,48)    # for wider view over all the Italian Alps
+
 fc_jun18_dol <- crop(fc_jun18, ext)
 fc_jun19_dol <- crop(fc_jun19, ext)
 
@@ -130,8 +132,16 @@ fc_dif <- fc_jun19_dol  - fc_jun18_dol
 fc_cl <- colorRampPalette(c('black', 'yellow','green'))(100)
  
 #Plotting the differences
-plot(fc_dif, col= fc_cl)
+#plot(fc_dif, col= fc_cl)
 
 
 ### CONSIDERATIONS: way better!!
 
+# Let's look at the difference between Jun2017 and June 2018
+fc_jun17 <- raster("c_gls_FCOVER300_201706100000_GLOBE_PROBAV_V1.0.1.nc")
+fc_jun17_dol <- crop(fc_jun17, ext)
+fc_dif.1 <- fc_jun18_dol  - fc_jun17_dol 
+par(mfrow=c(1,2))
+plot(fc_dif, col= fc_cl, main="FCOVER JUN19-JUN18")
+plot(fc_dif.1, col= fc_cl, main="FCOVER JUN18-JUN17")
+par(mfrow=c(1,1))
