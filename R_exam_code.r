@@ -1,6 +1,23 @@
 # CODE FOR THE EXAM
 
+# DECORANA ON COMMUNITY DATASET
 
+setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+library(vegan)
+
+# import csv file from working directory
+lagoon <- read.csv2("lagoon.csv")
+
+# Divide into two different objects data of abundance and habitat type
+lag_n <- lagoon [ , 5:53]
+lag_h <- lagoon [ , 1:4]
+
+#Decorana on the species abundance
+decor_lag <- decorana (lag_n)
+
+plot(decor_lag, display="species", cex = 0.5)
+ordiellipse(multivar_lag, HABITAT, col=c("black","red","green","blue"), kind = "ehull", lwd=3) 
+ordispider(multivar_lag, HABITAT, col=c("black","red","green","blue"), label = T) 
 
 # ANALYSIS OF THE NDVI BEFORE AND AFTER VAIA STORM IN NORTHERN EAST ITALY
 
