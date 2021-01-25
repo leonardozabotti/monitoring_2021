@@ -130,6 +130,9 @@ plot(al_dif, col= al_cl)
 ###----------------------------------------------------------------------
 
 # Let's try using FCOVER 
+setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+library(ncdf4)
+library(raster)
 
 fc_jun18 <- raster("c_gls_FCOVER300_201806100000_GLOBE_PROBAV_V1.0.1.nc")
 fc_jun19 <- raster("c_gls_FCOVER300_201906100000_GLOBE_PROBAV_V1.0.1.nc")
