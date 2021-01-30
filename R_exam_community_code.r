@@ -27,7 +27,7 @@ points(lag_mar_ppp)
 
 ##   We now want to interpolate missing data
 
-marks(lag_mar_ppp) <- ABO        #we're interpolating the values of chlorophyll explaining to R what is the variable we want to use. Remember \libray(spatstat)\ and \attach(leo)\
+marks(lag_mar_ppp) <- ABO       
 abo_map_mar <- Smooth(lag_mar_ppp)
 
 cl <- colorRampPalette(c('black','blue','yellow'))(100) 
@@ -86,7 +86,7 @@ par(mfrow=c(1,1))
 par(mfrow=c(2,3))
 
 attach(lag_mar)
-marks(lag_mar_ppp) <- APFA        #we're interpolating the values of chlorophyll explaining to R what is the variable we want to use. Remember \libray(spatstat)\ and \attach(leo)\
+marks(lag_mar_ppp) <- APFA       
 apfa_map_mar <- Smooth(lag_mar_ppp)
 plot(apfa_map_mar, col=cl, main= "A. fasciatus abundance 03/19")
 points(lag_mar_ppp, pch=20 , col='white', )
@@ -126,7 +126,7 @@ par(mfrow=c(1,1))
 par(mfrow=c(2,3))
 
 attach(lag_mar)
-marks(lag_mar_ppp) <- KPA        #we're interpolating the values of chlorophyll explaining to R what is the variable we want to use. Remember \libray(spatstat)\ and \attach(leo)\
+marks(lag_mar_ppp) <- KPA      
 apfa_map_mar <- Smooth(lag_mar_ppp)
 plot(apfa_map_mar, col=cl, main= "K. panizzae abundance 03/19")
 points(lag_mar_ppp, pch=20 , col='white', )
@@ -167,7 +167,7 @@ par(mfrow=c(1,1))
 par(mfrow=c(2,3))
 
 attach(lag_mar)
-marks(lag_mar_ppp) <- PCA        #we're interpolating the values of chlorophyll explaining to R what is the variable we want to use. Remember \libray(spatstat)\ and \attach(leo)\
+marks(lag_mar_ppp) <- PCA        
 pca_map_mar <- Smooth(lag_mar_ppp)
 plot(pca_map_mar, col=cl, main= "P. canestrinii abundance 03/19")
 points(lag_mar_ppp, pch=20 , col='white', )
@@ -207,7 +207,7 @@ par(mfrow=c(1,1))
 
 par(mfrow=c(3,5))
 attach(lag_mar)
-marks(lag_mar_ppp) <- APFA        #we're interpolating the values of chlorophyll explaining to R what is the variable we want to use. Remember \libray(spatstat)\ and \attach(leo)\
+marks(lag_mar_ppp) <- APFA       
 apfa_map_mar <- Smooth(lag_mar_ppp)
 plot(apfa_map_mar, col=cl, main= "A. fasciatus abundance 03/19")
 points(lag_mar_ppp, pch=20 , col='white', )
@@ -241,7 +241,7 @@ plot(apfa_map_nov, col=cl, main= "A. fasciatus abundance 11/19")
 points(lag_nov_ppp, pch=20 , col='white', )
 
 attach(lag_mar)
-marks(lag_mar_ppp) <- KPA        #we're interpolating the values of chlorophyll explaining to R what is the variable we want to use. Remember \libray(spatstat)\ and \attach(leo)\
+marks(lag_mar_ppp) <- KPA       
 apfa_map_mar <- Smooth(lag_mar_ppp)
 plot(apfa_map_mar, col=cl, main= "K. panizzae abundance 03/19")
 points(lag_mar_ppp, pch=20 , col='white', )
@@ -275,7 +275,7 @@ plot(kpa_map_nov, col=cl, main= "K. panizzae abundance 11/19")
 points(lag_nov_ppp, pch=20 , col='white', )
 
 attach(lag_mar)
-marks(lag_mar_ppp) <- PCA        #we're interpolating the values of chlorophyll explaining to R what is the variable we want to use. Remember \libray(spatstat)\ and \attach(leo)\
+marks(lag_mar_ppp) <- PCA       
 pca_map_mar <- Smooth(lag_mar_ppp)
 plot(pca_map_mar, col=cl, main= "P. canestrinii abundance 03/19")
 points(lag_mar_ppp, pch=20 , col='white', )
