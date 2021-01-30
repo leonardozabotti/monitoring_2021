@@ -19,7 +19,7 @@ lag_nov <- lagoon[lagoon$ï..PERIODO=="NOVEMBRE",]
 
 library(spatstat)
 attach(lag_mar)
-lag_mar_ppp <- ppp(x, y, c(2300000,2325000), c(5005000,5045000))       # \summary(leo)\ will show the minimum and maximum x and y in order to build the range (usually bigger than the values)
+lag_mar_ppp <- ppp(x, y, c(2300000,2325000), c(5005000,5045000))      
 
 dens_lag_mar <- density(lag_mar_ppp)      #to build the density object and then plot it
 plot(dens_lag_mar)
