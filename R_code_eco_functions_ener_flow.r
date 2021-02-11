@@ -7,11 +7,11 @@
 
 setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
 
-# install.packages("rasterdiv")
+# install.packages("rasterdiv")      
 # install.packages("rasterVis")
 
-library(rasterVis)
-library(rasterdiv)
+library(rasterVis)        #for enhanced visualization and interaction with raster data
+library(rasterdiv)        # Providing functions to calculate indices of diversity on numerical matrices based on information theory
 
 data(copNDVI)         # load data already inside the package
 plot(copNDVI)
