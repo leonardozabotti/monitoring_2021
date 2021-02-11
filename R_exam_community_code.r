@@ -1,4 +1,4 @@
-# CODE FOR THE EXAM - WORKING ON COMMUNITY DATASET
+# CODE FOR THE EXAM PART 1 - WORKING ON COMMUNITY DATASET
 
 ## 1- Looking at abundances througout the year for 3 "Community Interest" species in the Venice Lagoon
 
