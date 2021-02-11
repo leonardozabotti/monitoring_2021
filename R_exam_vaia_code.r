@@ -1,6 +1,6 @@
 # ANALYSIS OF THE NDVI-ALBEDO-FCOVER-LST BEFORE AND AFTER VAIA STORM IN NORTHERN EAST ITALY
 
-setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+setwd("C:/Users/Leonardo/lab")
 library(ncdf4)
 library(raster)
 
