@@ -2,7 +2,7 @@
 
 ## 1- Looking at abundances througout the year for 3 "Community Interest" species in the Venice Lagoon
 
-setwd("C:/Users/Leonardo/Desktop/Università/UNIBO/PRIMO ANNO/MONITORING ECOSYSTEMS CHANGES AND FUNCTIONING/lab")
+setwd("C:/Users/Leonardo/lab")
 
 rm(list=ls())
 
